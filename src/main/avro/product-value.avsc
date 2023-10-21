@@ -1,0 +1,80 @@
+{
+  "type": "record",
+  "name": "Product",
+  "namespace": "org.samodumkina.product",
+  "fields": [
+    {
+      "name": "product_id",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "doc": "Product unique identifier",
+      "default": null
+    },
+    {
+      "name": "name",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "doc": "Product name",
+      "default": null
+    },
+    {
+      "name": "price",
+      "type": [
+        "null",
+        "float"
+      ],
+      "doc": "Product Price",
+      "default": null
+    },
+    {
+      "name": "description",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "doc": "Description of product",
+      "default": null
+    },
+    {
+      "name": "product_type",
+      "type": [
+        "null",
+        {
+          "type": "enum",
+          "name": "ProductType",
+          "symbols": [
+            "DIARY",
+            "GREEN",
+            "PET_FOOD"
+          ]
+        }
+      ],
+      "doc": "Product category type",
+      "default": null
+    },
+    {
+      "name": "review",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "default": null
+    }
+  ]
+}

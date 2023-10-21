@@ -1,0 +1,35 @@
+spring:
+  kafka:
+    bootstrap-servers: ${CONFLUENCE_BOOTSTRAP_SERVER}
+    properties:
+      session:
+        timeout.ms: 45000
+      security:
+        protocol: SASL_SSL
+      schema.registry.url: ${CONFLUENCE_SCHEMA_REGISTRY_URL}
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username="${CONFLUENCE_KAFKA_LOGIN}" password="${CONFLUENCE_KAFKA_PASSWORD}";
+
+      basic:
+        auth:
+          credentials:
+            source: USER_INFO
+          user.info: ${SCHEMA_REGISTRY_USERNAME}:${SCHEMA_REGISTRY_PASSWORD}
+    consumer:
+      group-id: local
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        specific.avro.reader: true
+        spring.deserializer.value.delegate.class: io.confluent.kafka.serializers.KafkaAvroDeserializer
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+    topic:
+      avro: product
+  config:
+    import: file:env.properties
